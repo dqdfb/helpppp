@@ -1,0 +1,125 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-sky-soft: var(--sky-soft);
+  --color-sky-deep: var(--sky-deep);
+  --color-orange-brand: var(--orange-brand);
+  --font-display: "Gaegu", "Nanum Pen Script", cursive;
+  --font-body: "Gowun Dodum", "Noto Sans KR", sans-serif;
+}
+
+:root {
+  --radius: 1.25rem;
+  --background: oklch(0.98 0.015 240);
+  --foreground: oklch(0.25 0.08 260);
+  --card: oklch(1 0 0 / 0.7);
+  --card-foreground: oklch(0.25 0.08 260);
+  --primary: oklch(0.55 0.18 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.94 0.04 240);
+  --secondary-foreground: oklch(0.3 0.1 260);
+  --muted: oklch(0.95 0.02 240);
+  --muted-foreground: oklch(0.5 0.05 260);
+  --accent: oklch(0.9 0.08 240);
+  --accent-foreground: oklch(0.3 0.1 260);
+  --border: oklch(0.85 0.05 240);
+  --ring: oklch(0.7 0.15 255);
+  --sky-soft: oklch(0.94 0.05 235);
+  --sky-deep: oklch(0.7 0.13 240);
+  --orange-brand: oklch(0.72 0.18 55);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background: linear-gradient(180deg, #e8f2ff 0%, #d4e6fb 50%, #b8d4f0 100%);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    min-height: 100vh;
+  }
+  h1, h2, h3 { font-family: var(--font-display); }
+}
+
+@utility text-handwritten {
+  font-family: var(--font-display);
+}
+
+@utility bg-sky-gradient {
+  background: linear-gradient(180deg, #e8f2ff 0%, #b8d4f0 100%);
+}
+
+@utility bg-ocean-gradient {
+  background: linear-gradient(180deg, #7ab5e8 0%, #3d7cc9 60%, #1e5a9e 100%);
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px rgba(60, 100, 180, 0.15);
+}
+
+@utility underline-scribble {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'><path d='M2 6 Q 50 2 100 6 T 198 6' stroke='%234a90e2' stroke-width='3' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 10px;
+  padding-bottom: 8px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@utility animate-float { animation: float 4s ease-in-out infinite; }
+
+@keyframes bubble-rise {
+  0%   { transform: translateY(10vh) scale(0.4); opacity: 0; }
+  8%   { opacity: var(--bubble-opacity, 0.85); }
+  92%  { opacity: var(--bubble-opacity, 0.85); }
+  100% { transform: translateY(-115vh) scale(1.15); opacity: 0; }
+}
+@keyframes bubble-sway {
+  0%   { transform: translateX(0) rotate(0deg); }
+  25%  { transform: translateX(calc(var(--sway, 20px) * -1)) rotate(-6deg); }
+  50%  { transform: translateX(0) rotate(0deg); }
+  75%  { transform: translateX(var(--sway, 20px)) rotate(6deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+@keyframes bubble-shimmer {
+  0%, 100% { filter: brightness(1) saturate(1); }
+  50%      { filter: brightness(1.25) saturate(1.3); }
+}
+@utility animate-bubble { animation: bubble-rise linear infinite; }
+@utility animate-bubble-sway { animation: bubble-sway ease-in-out infinite; }
+@utility animate-bubble-shimmer { animation: bubble-shimmer ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@utility animate-pop { animation: pop-in 0.4s ease-out; }
